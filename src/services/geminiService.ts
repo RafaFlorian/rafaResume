@@ -1,15 +1,6 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  // This is a fallback for development and will show an error in the console.
-  // In a real production environment, the API_KEY should be securely managed.
-  console.error("Gemini API key not found. Please set the API_KEY environment variable.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY! });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
 
 const portfolioContext = `
 You are an AI assistant for John Doe, a professional Data Engineer. 
@@ -41,15 +32,13 @@ Base your answers ONLY on the information provided below. Do not invent informat
 `;
 
 export async function* askAIAssistant(prompt: string): AsyncGenerator<string> {
-  if (!API_KEY) {
-    yield "API Key not configured. Please contact the site administrator.";
-    return;
-  }
-  
   try {
     const stream = await ai.models.generateContentStream({
       model: 'gemini-2.5-flash',
-      contents: `${portfolioContext}\n\nUser Query: ${prompt}`,
+      contents: prompt,
+      config: {
+        systemInstruction: portfolioContext,
+      },
     });
     
     for await (const chunk of stream) {

@@ -11,15 +11,15 @@ export interface Project {
   tags: string[];
 }
 
-export interface ChatMessage {
-  id: number;
-  role: 'user' | 'model';
-  text: string;
-}
-
 export interface BlogPost {
   title: string;
   date: string;
   excerpt: string;
   tags: string[];
+}
+
+export interface ChatMessage {
+  id: number;
+  role: 'user' | 'model';
+  text: string;
 }

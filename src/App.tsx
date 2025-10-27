@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -103,7 +102,7 @@ const App: React.FC = () => {
           <Contact />
         </div>
       </main>
-
+      
       <AIAssistant />
     </div>
   );

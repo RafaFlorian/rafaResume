@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
